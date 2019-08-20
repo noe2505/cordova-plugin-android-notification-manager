@@ -1,0 +1,36 @@
+{
+  "name": "cordova-plugin-android-notification-manager",
+  "version": "0.0.1",
+  "description": "Manage android notification channels in cordova application",
+  "cordova": {
+    "id": "cordova-plugin-android-notification-manager",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.scat.su/external/cordova-plugin-android-notification-manager"
+  },
+  "keywords": [
+    "android",
+    "notification",
+    "manager",
+    "channel",
+    "settings",
+    "system",
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "SKAT Ltd",
+  "license": "MIT",
+  "engines": {
+    "cordovaDependencies": {
+      "0.0.1": {
+        "cordova": ">=7.0.0",
+        "cordova-android": ">=6.3.0"
+      }
+    }
+  }
+}

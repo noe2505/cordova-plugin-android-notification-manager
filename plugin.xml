@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-android-notification-manager" version="0.0.1">
+    <name>Notification Manager</name>
+    <description>Manage android notification channels in cordova application</description>
+    <author>SKAT Ltd</author>
+    <keywords>android,notification,manager,channel,settings,system,cordova,ecosystem:cordova,cordova-android</keywords>
+    <license>MIT</license>
+    <engines>
+        <engine name="cordova" version=">=7.0.0" />
+        <engine name="cordova-android" version=">=6.3.0" />
+    </engines>
+    <js-module src="www/js/NotificationManager.js" name="NotificationManager">
+        <clobbers target="NotificationManager" />
+    </js-module>
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="NotificationManagerPlugin">
+                <param name="android-package" value="su.scat.calltaxi.NotificationManagerPlugin" />
+            </feature>
+        </config-file>
+        <source-file src="src/android/su/scat/calltaxi/NotificationManagerPlugin.java" target-dir="src/su/scat/calltaxi/"/>
+    </platform>
+</plugin>

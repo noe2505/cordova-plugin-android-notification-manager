@@ -1,0 +1,5 @@
+# IDE Files
+/.idea/
+
+# Generated Files
+/node_modules/
