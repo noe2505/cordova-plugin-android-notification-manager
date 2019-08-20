@@ -108,7 +108,7 @@ public class NotificationManagerPlugin extends CordovaPlugin {
             }
 
             if ("openAppNotificationSettings".equals(action)) {
-                openAppNotificationSettings(args.getString(0));
+                openAppNotificationSettings();
                 callbackContext.success();
                 return true;
             }
