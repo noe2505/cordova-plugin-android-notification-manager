@@ -1,5 +1,4 @@
-var serviceName = 'NotificationManagerPlugin',
-    NotificationChannel = function(channelJSON) {
+var NotificationChannel = function(channelJSON) {
 
         for (var property in channelJSON)
         {
@@ -11,19 +10,18 @@ var serviceName = 'NotificationManagerPlugin',
 
         this.openSettings = function()
         {
-            return new Promise(function(onSuccess, onFail) {
-                this._openSettings(onSuccess, onFail);
-            }.bind(this));
+            return NotificationManager.openNotificationChannelSettings(this.id);
         };
 
         this._openSettings = function(onSuccess, onFail) {
-            NotificationManager.openNotificationChannelSettings(this.id, onSuccess, onFail);
+            NotificationManager._openNotificationChannelSettings(this.id, onSuccess, onFail);
         };
     },
     NotificationManager = function() {
     };
 
 
+NotificationManager.SERVICE_NAME = 'NotificationManagerPlugin';
 /**
  * @see https://developer.android.com/reference/android/app/NotificationManager.html#IMPORTANCE_DEFAULT
  * @type {number}
@@ -85,19 +83,19 @@ NotificationManager.openNotificationChannelSettings = function(channelId) {
 NotificationManager._getNotificationChannel = function(channelId, onSuccess, onFail) {
     cordova.exec(function(channelJSON) {
         onSuccess(new NotificationChannel(channelJSON));
-    }, onFail, serviceName, 'getNotificationChannel', [channelId]);
+    }, onFail, NotificationManager.SERVICE_NAME, 'getNotificationChannel', [channelId]);
 };
 
 
 NotificationManager._openAppNotificationSettings = function(onSuccess, onFail) {
-    cordova.exec(onSuccess, onFail, serviceName, 'openAppNotificationSettings');
+    cordova.exec(onSuccess, onFail, NotificationManager.SERVICE_NAME, 'openAppNotificationSettings');
 };
 
 
 NotificationManager._openNotificationChannelSettings = function(channelId, onSuccess, onFail) {
     cordova.exec(function(channelJSON) {
         onSuccess(new NotificationChannel(channelJSON));
-    }, onFail, serviceName, 'openNotificationChannelSettings', [channelId]);
+    }, onFail, NotificationManager.SERVICE_NAME, 'openNotificationChannelSettings', [channelId]);
 };
 
 
