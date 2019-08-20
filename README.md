@@ -1,7 +1,7 @@
 # Usage
 
 ## Get a notification channel
-```
+```js
 NotificationManager.getNotificationChannel('channel_id')
     .then(console.info)
     .catch(console.error);
@@ -12,7 +12,7 @@ NotificationManager.getNotificationChannel('channel_id')
 ## Open a notification channel settings
 
 ### From the manager
-```
+```js
 NotificationManager.openNotificationChannelSettings('channel_id')
     .then(console.info)
     .catch(console.error);
@@ -22,7 +22,7 @@ NotificationManager.openNotificationChannelSettings('channel_id')
 
 
 ### From a channel
-```
+```js
 NotificationManager.getNotificationChannel('channel_id')
     .then(function(channel) {
         channel.openSettings().
@@ -36,7 +36,7 @@ NotificationManager.getNotificationChannel('channel_id')
 
 ## Open an app notification settings
 
-```
+```js
 NotificationManager.openAppNotificationSettings()
     .then(console.info)
     .catch(console.error);
