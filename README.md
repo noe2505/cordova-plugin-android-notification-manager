@@ -11,6 +11,8 @@ NotificationManager.getNotificationChannel('channel_id')
 
 ## Open a notification channel settings
 
+![Notification Channel Settings](./docs/img/openNotificationChannelSettings.png)
+
 ### From the manager
 ```js
 NotificationManager.openNotificationChannelSettings('channel_id')
@@ -35,6 +37,8 @@ NotificationManager.getNotificationChannel('channel_id')
 ```
 
 ## Open an app notification settings
+
+![Notification Channel Settings](./docs/img/openAppNotificationSettings.png)
 
 ```js
 NotificationManager.openAppNotificationSettings()
