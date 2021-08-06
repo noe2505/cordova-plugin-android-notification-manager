@@ -27,7 +27,7 @@ NotificationManager.openNotificationChannelSettings('channel_id')
 ```js
 NotificationManager.getNotificationChannel('channel_id')
     .then(function(channel) {
-        channel.openSettings().
+        channel.openSettings()
             .then(console.info)
             .catch(console.error);
     })
