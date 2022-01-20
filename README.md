@@ -1,3 +1,12 @@
+# Credits
+
+Simple plugin to manage Android Notificacion Channels.
+
+Forked from https://git.scat.su/external/cordova-plugin-android-notification-manager, original credits go to Andrey Sharapov (@sharupoff).
+
+Original plugin lacked the funcionality to add customized Notification Channels, this fork enables your Cordova App to do so.
+
+
 # Usage
 
 ## Create a notification channel
