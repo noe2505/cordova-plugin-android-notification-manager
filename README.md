@@ -16,6 +16,10 @@ NotificationManager.setNotificationChannel("channel_id","channel_name","channel_
     .catch(console.error);
 ```
 
+### Customize alert sounds
+Place your mp3 files in /res/raw/, the file name must match the channel_id.
+
+
 ## Get a notification channel
 ```js
 NotificationManager.getNotificationChannel('channel_id')
