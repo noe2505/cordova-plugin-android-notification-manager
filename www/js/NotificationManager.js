@@ -1,24 +1,19 @@
-var NotificationChannel = function(channelJSON) {
-
-        for (var property in channelJSON)
-        {
-            if (channelJSON.hasOwnProperty(property))
-            {
-                this[property] = channelJSON[property];
-            }
+var NotificationChannel=function(channelJSON){
+    for(var property in channelJSON){
+        if(channelJSON.hasOwnProperty(property)){
+            this[property]=channelJSON[property];
         }
+    }
 
-        this.openSettings = function()
-        {
-            return NotificationManager.openNotificationChannelSettings(this.id);
-        };
-
-        this._openSettings = function(onSuccess, onFail) {
-            NotificationManager._openNotificationChannelSettings(this.id, onSuccess, onFail);
-        };
-    },
-    NotificationManager = function() {
+    this.openSettings=function(){
+        return NotificationManager.openNotificationChannelSettings(this.id);
     };
+
+    this._openSettings = function(onSuccess, onFail) {
+        NotificationManager._openNotificationChannelSettings(this.id, onSuccess, onFail);
+    };
+},
+NotificationManager=function(){};
 
 
 NotificationManager.SERVICE_NAME = 'NotificationManagerPlugin';
@@ -56,22 +51,27 @@ NotificationManager.IMPORTANCE_NONE = 0;
  * @see https://developer.android.com/reference/android/app/NotificationManager.html#IMPORTANCE_UNSPECIFIED
  * @type {number}
  */
-NotificationManager.IMPORTANCE_UNSPECIFIED = -1000;
+NotificationManager.IMPORTANCE_UNSPECIFIED=-1000;
 
 
-NotificationManager.getNotificationChannel = function(channelId) {
-    return new Promise(function(onSuccess, onFail) {
-        NotificationManager._getNotificationChannel(channelId, onSuccess, onFail);
+NotificationManager.setNotificationChannel=function(channelId,channelName,channelDescription,channelSound){
+    return new Promise(function(onSuccess,onFail){
+        NotificationManager._setNotificationChannel(channelId,channelName,channelDescription,channelSound,onSuccess,onFail);
     });
 };
 
 
-NotificationManager.openAppNotificationSettings = function(channelId) {
-    return new Promise(function(onSuccess, onFail) {
-        NotificationManager._openAppNotificationSettings(channelId, onSuccess, onFail);
+NotificationManager.getNotificationChannel=function(channelId) {
+    return new Promise(function(onSuccess,onFail){
+        NotificationManager._getNotificationChannel(channelId,onSuccess,onFail);
     });
 };
 
+NotificationManager.openAppNotificationSettings=function(channelId){
+    return new Promise(function(onSuccess,onFail){
+        NotificationManager._openAppNotificationSettings(channelId,onSuccess,onFail);
+    });
+};
 
 NotificationManager.openNotificationChannelSettings = function(channelId) {
     return new Promise(function(onSuccess, onFail) {
@@ -80,8 +80,15 @@ NotificationManager.openNotificationChannelSettings = function(channelId) {
 };
 
 
+NotificationManager._setNotificationChannel=function(channelId,channelName,channelDescription,channelSound,onSuccess,onFail){
+    cordova.exec(function(channelJSON){
+        onSuccess(new NotificationChannel(channelJSON));
+    }, onFail, NotificationManager.SERVICE_NAME, 'setNotificationChannel', [channelId,channelName,channelDescription,channelSound]);
+};
+
+
 NotificationManager._getNotificationChannel = function(channelId, onSuccess, onFail) {
-    cordova.exec(function(channelJSON) {
+    cordova.exec(function(channelJSON){
         onSuccess(new NotificationChannel(channelJSON));
     }, onFail, NotificationManager.SERVICE_NAME, 'getNotificationChannel', [channelId]);
 };

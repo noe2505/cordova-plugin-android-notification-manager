@@ -1,11 +1,18 @@
 # Usage
 
+## Create a notification channel
+```js
+NotificationManager.setNotificationChannel("channel_id","channel_name","channel_description","mp3_file_name_without_extension")
+    .then(console.info)
+    .catch(console.error);
+```
+
 ## Get a notification channel
 ```js
 NotificationManager.getNotificationChannel('channel_id')
     .then(console.info)
     .catch(console.error);
-    
+
 // NotificationChannel {id: "channel_id", importance: 5, lightColor: 0, lockscreenVisibility: -1000, openSettings: ƒ, …}
 ```
 
@@ -18,7 +25,7 @@ NotificationManager.getNotificationChannel('channel_id')
 NotificationManager.openNotificationChannelSettings('channel_id')
     .then(console.info)
     .catch(console.error);
-    
+
 // OK
 ```
 
@@ -32,7 +39,7 @@ NotificationManager.getNotificationChannel('channel_id')
             .catch(console.error);
     })
     .catch(console.error);
-    
+
 // OK
 ```
 
@@ -44,6 +51,6 @@ NotificationManager.getNotificationChannel('channel_id')
 NotificationManager.openAppNotificationSettings()
     .then(console.info)
     .catch(console.error);
-    
+
 // OK
 ```
