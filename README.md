@@ -11,7 +11,7 @@ Original plugin lacked the funcionality to add customized Notification Channels,
 
 ## Create a notification channel
 ```js
-NotificationManager.setNotificationChannel("channel_id","channel_name","channel_description","mp3_file_name_without_extension")
+NotificationManager.setNotificationChannel("channel_id","channel_name","channel_description","channel_importance","mp3_file_name_same_as_channel_id_without_extension")
     .then(console.info)
     .catch(console.error);
 ```

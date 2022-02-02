@@ -54,9 +54,9 @@ NotificationManager.IMPORTANCE_NONE = 0;
 NotificationManager.IMPORTANCE_UNSPECIFIED=-1000;
 
 
-NotificationManager.setNotificationChannel=function(channelId,channelName,channelDescription,channelSound){
+NotificationManager.setNotificationChannel=function(channelId,channelName,channelDescription,channelImportance,channelSound){
     return new Promise(function(onSuccess,onFail){
-        NotificationManager._setNotificationChannel(channelId,channelName,channelDescription,channelSound,onSuccess,onFail);
+        NotificationManager._setNotificationChannel(channelId,channelName,channelDescription,channelImportance,channelSound,onSuccess,onFail);
     });
 };
 

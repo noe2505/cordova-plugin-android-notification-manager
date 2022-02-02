@@ -84,7 +84,7 @@ public class NotificationManagerPlugin extends CordovaPlugin {
     }
 
     @TargetApi(26)
-    private JSONObject setNotificationChannel(String channelId,CharSequence channelName,String channelDescription,String channelSound){
+    private JSONObject setNotificationChannel(String channelId,CharSequence channelName,Int channelImportance,String channelDescription,String channelSound){
         JSONObject channelJSON=new JSONObject();
         // only call on Android O and above
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
@@ -92,8 +92,7 @@ public class NotificationManagerPlugin extends CordovaPlugin {
             final NotificationManager manager=(NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
             //final NotificationChannel channel = manager.getNotificationChannel(channelId);
 
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel=new NotificationChannel(channelId,channelName,importance);
+            NotificationChannel channel=new NotificationChannel(channelId,channelName,channelImportance);
             channel.setDescription(channelDescription);
 
             Uri soundUri=Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+activity.getApplicationContext().getPackageName()+"/raw/"+channelSound);
