@@ -17,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import java.util.*;
+import java.util.stream.*;
 
 public class NotificationManagerPlugin extends CordovaPlugin {
 
@@ -84,7 +86,7 @@ public class NotificationManagerPlugin extends CordovaPlugin {
     }
 
     @TargetApi(26)
-    private JSONObject setNotificationChannel(String channelId,CharSequence channelName,Int channelImportance,String channelDescription,String channelSound){
+    private JSONObject setNotificationChannel(String channelId,CharSequence channelName,String channelDescription,String channelSound,String str_channelVibrate){
         JSONObject channelJSON=new JSONObject();
         // only call on Android O and above
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
@@ -92,16 +94,24 @@ public class NotificationManagerPlugin extends CordovaPlugin {
             final NotificationManager manager=(NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
             //final NotificationChannel channel = manager.getNotificationChannel(channelId);
 
-            NotificationChannel channel=new NotificationChannel(channelId,channelName,channelImportance);
-            channel.setDescription(channelDescription);
-
-            Uri soundUri=Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+activity.getApplicationContext().getPackageName()+"/raw/"+channelSound);
-            channel.setSound(soundUri,Notification.AUDIO_ATTRIBUTES_DEFAULT);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel=new NotificationChannel(channelId,channelName,importance);
             
+            channel.setDescription(channelDescription);
+            
+            Uri soundUri=Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+activity.getApplicationContext().getPackageName()+"/raw/"+channelSound);
+            //Uri soundUri=Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+activity.getApplicationContext().getPackageName()+"/"+channelSound);
+            //AudioAttributes audioAttributes=new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).setUsage(AudioAttributes.USAGE_NOTIFICATION).build();
+            //channel.setSound(soundUri,audioAttributes);
+            channel.setSound(soundUri,Notification.AUDIO_ATTRIBUTES_DEFAULT);
+
+            long[] longPrimitiveArray = Arrays.stream(str_channelVibrate.split(",")).map(String::trim).mapToLong(Long::valueOf).toArray();
+            channel.enableVibration(true);
+            channel.setVibrationPattern(longPrimitiveArray);
+
             // Register the channel with the system; you can't change the importance or other notification behaviors after this
             NotificationManager notificationManager=(NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
 
-            //notificationManager.deleteNotificationChannel(channelId);
             notificationManager.createNotificationChannel(channel);
         }
 
@@ -114,7 +124,7 @@ public class NotificationManagerPlugin extends CordovaPlugin {
         try {
 
             if ("setNotificationChannel".equals(action)) {
-                callbackContext.success(setNotificationChannel(args.getString(0),args.getString(1),args.getString(2),args.getString(3) ));
+                callbackContext.success(setNotificationChannel(args.getString(0),args.getString(1),args.getString(2),args.getString(3),args.getString(4)));
                 return true;
             }
 

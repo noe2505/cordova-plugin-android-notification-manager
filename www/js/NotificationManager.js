@@ -54,9 +54,9 @@ NotificationManager.IMPORTANCE_NONE = 0;
 NotificationManager.IMPORTANCE_UNSPECIFIED=-1000;
 
 
-NotificationManager.setNotificationChannel=function(channelId,channelName,channelDescription,channelImportance,channelSound){
+NotificationManager.setNotificationChannel=function(channelId,channelName,channelDescription,channelSound,channelVibrate){
     return new Promise(function(onSuccess,onFail){
-        NotificationManager._setNotificationChannel(channelId,channelName,channelDescription,channelImportance,channelSound,onSuccess,onFail);
+        NotificationManager._setNotificationChannel(channelId,channelName,channelDescription,channelSound,channelVibrate,onSuccess,onFail);
     });
 };
 
@@ -73,17 +73,17 @@ NotificationManager.openAppNotificationSettings=function(channelId){
     });
 };
 
-NotificationManager.openNotificationChannelSettings = function(channelId) {
-    return new Promise(function(onSuccess, onFail) {
-        NotificationManager._openNotificationChannelSettings(channelId, onSuccess, onFail);
+NotificationManager.openNotificationChannelSettings=function(channelId) {
+    return new Promise(function(onSuccess,onFail){
+        NotificationManager._openNotificationChannelSettings(channelId,onSuccess,onFail);
     });
 };
 
 
-NotificationManager._setNotificationChannel=function(channelId,channelName,channelDescription,channelSound,onSuccess,onFail){
+NotificationManager._setNotificationChannel=function(channelId,channelName,channelDescription,channelSound,channelVibrate,onSuccess,onFail){
     cordova.exec(function(channelJSON){
         onSuccess(new NotificationChannel(channelJSON));
-    }, onFail, NotificationManager.SERVICE_NAME, 'setNotificationChannel', [channelId,channelName,channelDescription,channelSound]);
+    },onFail,NotificationManager.SERVICE_NAME,'setNotificationChannel',[channelId,channelName,channelDescription,channelSound,channelVibrate]);
 };
 
 
